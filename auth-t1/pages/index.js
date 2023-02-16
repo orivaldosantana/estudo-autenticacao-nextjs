@@ -24,6 +24,8 @@ export default function Home() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+
+    console.log(email, password) 
   }
 
   return (
