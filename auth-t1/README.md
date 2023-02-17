@@ -23,13 +23,13 @@ Esta seção descreve a estratégia de autenticação.
 - Passos:
 
   - Usuário enviar credenciais via formulário no _frontend_ e o _backend_ valida e devolve um o token.
-  - O fronte armazena o cookie
+  - O fronte armazena o cookie com o token e outras informações do usuário
 
 - Detalhes:
 
   - Acesso a rota de autenticação. Neste caso utilizando 'axios' e organizando um arquivo `http.js` para gerenciar essa questão.
   - A estratrégia para tornar os dados acessíveis em várias parte da aplicação é o padrão "Contexto" e "Provedor"
-  - Um componente de contexto é craido
+  - Um componente de contexto é criado
   - Esse componente é colocado em volta de todas as páginas no código principal da aplicação (`_app.js`)
 
 - Pacotes necessários:

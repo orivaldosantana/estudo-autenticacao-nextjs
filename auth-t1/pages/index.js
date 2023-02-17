@@ -64,6 +64,7 @@ export default function Home() {
             width={180}
             height={30}
             priority="true"
+            alt="Logo Dataviwer"
           />
         </Box>
         <Box
@@ -100,7 +101,12 @@ export default function Home() {
           marginBottom: "auto",
         }}
       >
-        <Image src="/dataviewer_full.svg" width={200} height={115} />
+        <Image
+          src="/dataviewer_full.svg"
+          width={200}
+          height={115}
+          alt="Logo Dataviwer maior."
+        />
         {openAlert && (
           <Alert
             severity="error"
