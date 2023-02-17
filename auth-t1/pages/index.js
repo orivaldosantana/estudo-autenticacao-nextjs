@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
+import React, { useContext, useState } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { AuthContext } from "@/contexts/AuthContext"
 
 import {
   Container,
@@ -10,48 +11,52 @@ import {
   Button,
   Alert,
   IconButton,
-  AlertTitle
-} from '@mui/material'
+  AlertTitle,
+} from "@mui/material"
 
-import { Close } from '@mui/icons-material/'
-import { http } from '@/utils/http'
+import { Close } from "@mui/icons-material/"
+//import { http } from "@/utils/http"
 
 export default function Home() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [openAlert, setOpenAlert] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [alertMessage, setAlertMessage] = useState('')
+  const [alertMessage, setAlertMessage] = useState("")
+  const { signIn } = useContext(AuthContext)
 
   async function handleSubmit(e) {
     e.preventDefault()
 
-    console.log(email, password) 
+    console.log(email, password)
 
-    http.get('/auth/oi').then(res => {
-      const data = res.data;
+    await signIn(email, password)
+
+    /*
+    http.get("/auth/oi").then((res) => {
+      const data = res.data
       console.log(data)
-    })
+    })*/
   }
 
   return (
     <Container
       sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        paddingTop: '160px'
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        paddingTop: "160px",
       }}
     >
       <Box
         sx={{
-          width: '630px',
-          marginLeft: '30px'
+          width: "630px",
+          marginLeft: "30px",
         }}
       >
         <Box
           sx={{
-            paddingBottom: '25px'
+            paddingBottom: "25px",
           }}
         >
           <Image
@@ -63,7 +68,7 @@ export default function Home() {
         </Box>
         <Box
           sx={{
-            paddingBottom: '25px'
+            paddingBottom: "25px",
           }}
         >
           <Typography variant="body1" color="#373737">
@@ -74,25 +79,25 @@ export default function Home() {
             seus alunos, através de um dashboard. Enquanto que no ambiente do
             aluno são fornecidos feedbacks quanto à assimilação do conteúdo e
             funcionalidades que estimulam o aprendizado de forma personalizada.
-            Tudo isso em tempo real e de forma automatizada.{' '}
+            Tudo isso em tempo real e de forma automatizada.{" "}
           </Typography>
         </Box>
         <Image src="/intro_dv.svg" width={652} height={444} />
       </Box>
       <Box
         sx={{
-          marginLeft: '80px',
-          marginRight: '10vh',
-          maxWidth: '460px',
-          width: '380px',
-          padding: '60px 20px',
-          textAlign: 'center',
-          color: '#273b73',
-          backgroundColor: '#fff',
-          border: '0px solid #5882fa',
-          boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-          borderRadius: '8px',
-          marginBottom: 'auto'
+          marginLeft: "80px",
+          marginRight: "10vh",
+          maxWidth: "460px",
+          width: "380px",
+          padding: "60px 20px",
+          textAlign: "center",
+          color: "#273b73",
+          backgroundColor: "#fff",
+          border: "0px solid #5882fa",
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          borderRadius: "8px",
+          marginBottom: "auto",
         }}
       >
         <Image src="/dataviewer_full.svg" width={200} height={115} />
@@ -119,9 +124,9 @@ export default function Home() {
             required
             fullWidth
             sx={{
-              my: 1
+              my: 1,
             }}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             label="senha"
@@ -131,9 +136,9 @@ export default function Home() {
             required
             fullWidth
             sx={{
-              my: 1
+              my: 1,
             }}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Button
             variant="contained"
@@ -141,12 +146,12 @@ export default function Home() {
             type="submit"
             disabled={loading}
             sx={{
-              bgcolor: '#273b73',
-              textTransform: 'none',
-              color: '#efefef',
-              '&:hover': {
-                bgcolor: '#4163bf'
-              }
+              bgcolor: "#273b73",
+              textTransform: "none",
+              color: "#efefef",
+              "&:hover": {
+                bgcolor: "#4163bf",
+              },
             }}
           >
             Entrar
