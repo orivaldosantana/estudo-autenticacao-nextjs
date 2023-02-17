@@ -14,6 +14,7 @@ import {
 } from '@mui/material'
 
 import { Close } from '@mui/icons-material/'
+import { http } from '@/utils/http'
 
 export default function Home() {
   const [email, setEmail] = useState('')
@@ -26,6 +27,11 @@ export default function Home() {
     e.preventDefault()
 
     console.log(email, password) 
+
+    http.get('/auth/oi').then(res => {
+      const data = res.data;
+      console.log(data)
+    })
   }
 
   return (
