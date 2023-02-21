@@ -21,15 +21,22 @@ export function AuthProvider({ children }) {
 
    async function signIn(email, password) {
       //TODO: realizar tratamento de erros
-      http.post("/auth/signin", { email, password }).then((res) => {
-         const userRes = res.data
-         setUser(userRes.user)
-         const token = userRes.access_token
-         setCookie(undefined, "nextautht1.token", token, {
-            maxAge: 60 * 90 * 1, //130 min
-         })
-         console.log("Dados do Usuário: ")
-         console.log(userRes)
+      const { data } = await http.post("/auth/signin", { email, password })
+      /*
+      const userRes = res.data
+      setUser(userRes.user)
+      const token = userRes.access_token
+      setCookie(undefined, "nextautht1.token", token, {
+         maxAge: 60 * 90 * 1, //130 min
+      }) */
+      console.log("Dados do Usuário: ")
+      console.log(data)
+
+      setUser(data.user)
+
+      const token = data.access_token
+      setCookie(undefined, "nextautht1.token", token, {
+         maxAge: 60 * 90 * 1, //130 min
       })
 
       Router.push("/dashboard")
